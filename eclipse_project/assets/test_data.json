@@ -1,0 +1,195 @@
+{
+	'airlines': [{
+		'id':1,
+		'name':'United'
+	},
+	{
+		'id':2,
+		'name':'Delta'
+	},
+	{
+		'id':3,
+		'name':'US Airways'
+	},
+	{
+		'id':4,
+		'name':'American Airlines'
+	}],
+
+	'flights': [{
+		'id':1,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:13,
+		'airlineId':4
+	},
+	{
+		'id':2,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:14,
+		'airlineId':1
+	},
+	{
+		'id':3,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:14,
+		'airlineId':1
+	},
+	{
+		'id':4,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:14,
+		'airlineId':1
+	},
+	{
+		'id':5,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:14,
+		'airlineId':1
+	},
+	{
+		'id':6,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:15,
+		'airlineId':2
+	},
+	{
+		'id':7,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:15,
+		'airlineId':2
+	},
+	{
+		'id':8,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:16,
+		'airlineId':3
+	},
+	{
+		'id':9,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:16,
+		'airlineId':3
+	},
+	{
+		'id':10,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:16,
+		'airlineId':3
+	},
+	{
+		'id':11,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:16,
+		'airlineId':3
+	},
+	{
+		'id':12,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:16,
+		'airlineId':3
+	},
+	{
+		'id':13,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:16,
+		'airlineId':3
+	},
+	{
+		'id':14,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:17,
+		'airlineId':1
+	},
+	{
+		'id':15,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:17,
+		'airlineId':1
+	},
+	{
+		'id':16,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:17,
+		'airlineId':1
+	},
+	{
+		'id':17,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:17,
+		'airlineId':1
+	},
+	{
+		'id':18,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:18,
+		'airlineId':2
+	},
+	{
+		'id':19,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:18,
+		'airlineId':2
+	},
+	{
+		'id':20,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:19,
+		'airlineId':3
+	},
+	{
+		'id':21,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:19,
+		'airlineId':3
+	},
+	{
+		'id':22,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:19,
+		'airlineId':3
+	},
+	{
+		'id':23,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:19,
+		'airlineId':3
+	},
+	{
+		'id':24,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:19,
+		'airlineId':3
+	},
+	{
+		'id':25,
+		'origin': 'a',
+		'destination':'b',
+		'departureTime:19,
+		'airlineId':3
+	}, 
+	]
+}
