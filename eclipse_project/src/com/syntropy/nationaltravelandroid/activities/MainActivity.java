@@ -31,6 +31,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
+        FlightManager.getFlightManager();
+        
         notificationSender = new NotificationSender(this);
         
         timerButton = (Button) findViewById(R.id.timerButton);

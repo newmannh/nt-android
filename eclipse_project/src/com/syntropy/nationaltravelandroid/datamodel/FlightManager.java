@@ -1,6 +1,10 @@
 package com.syntropy.nationaltravelandroid.datamodel;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.syntropy.nationaltravelandroid.exception.NTException;
@@ -11,9 +15,11 @@ public class FlightManager {
 	private ServerRequestManager serverRequestManager = null;
 	
 	private Flight[] flights = null;
+	private Map<String,Airline> airlines = null;
 	
 	
 	private FlightManager(){
+		airlines = new HashMap<String, Airline>();
 		serverRequestManager = new ServerRequestManager();
 		new AsyncTask<Void, Void, Void>() {
 			@Override
@@ -42,6 +48,20 @@ public class FlightManager {
 		String flightsJson = serverRequestManager.getJSON("flights", null);
 		Gson gson = new Gson();
 		flights = gson.fromJson(flightsJson, Flight[].class);
+		airlines.clear();
+		for(Flight flight: flights){
+			Airline airline = airlines.get(flight.getAirlineCode());
+			if(airline!=null){
+				airline.addFlight(flight);
+			} else {
+				airline = new Airline(flight.getAirlineCode(), flight.getAirlineName());
+				airline.addFlight(flight);
+				airlines.put(airline.getCode(), airline);
+			}
+		}
+		for(Airline airline : airlines.values()){
+			Log.w("ServerRequestManager", "Airline "+airline.getCode()+" has "+airline.getFlights().length+" flight(s)");
+		}
 	}
 	
 	/**
@@ -62,6 +82,17 @@ public class FlightManager {
 			}
 		}
 		return flights;
+	}
+	
+	public Airline[] getAirlines(boolean waitIfNecessary){
+		if(airlines.isEmpty() && waitIfNecessary){ 
+			try {
+				refreshFlightData();
+			} catch (NTException e) {
+				e.printStackTrace();
+			}
+		}
+		return airlines.values().toArray(new Airline[airlines.size()]);
 	}
 	
 }
