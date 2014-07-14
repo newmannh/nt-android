@@ -1,195 +1,193 @@
-{
-	'airlines': [{
-		'id':1,
-		'name':'United'
-	},
-	{
-		'id':2,
-		'name':'Delta'
-	},
-	{
-		'id':3,
-		'name':'US Airways'
-	},
-	{
-		'id':4,
-		'name':'American Airlines'
-	}],
-
-	'flights': [{
-		'id':1,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:13,
-		'airlineId':4
-	},
-	{
-		'id':2,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:14,
-		'airlineId':1
-	},
-	{
-		'id':3,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:14,
-		'airlineId':1
-	},
-	{
-		'id':4,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:14,
-		'airlineId':1
-	},
-	{
-		'id':5,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:14,
-		'airlineId':1
-	},
-	{
-		'id':6,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:15,
-		'airlineId':2
-	},
-	{
-		'id':7,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:15,
-		'airlineId':2
-	},
-	{
-		'id':8,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:16,
-		'airlineId':3
-	},
-	{
-		'id':9,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:16,
-		'airlineId':3
-	},
-	{
-		'id':10,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:16,
-		'airlineId':3
-	},
-	{
-		'id':11,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:16,
-		'airlineId':3
-	},
-	{
-		'id':12,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:16,
-		'airlineId':3
-	},
-	{
-		'id':13,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:16,
-		'airlineId':3
-	},
-	{
-		'id':14,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:17,
-		'airlineId':1
-	},
-	{
-		'id':15,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:17,
-		'airlineId':1
-	},
-	{
-		'id':16,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:17,
-		'airlineId':1
-	},
-	{
-		'id':17,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:17,
-		'airlineId':1
-	},
-	{
-		'id':18,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:18,
-		'airlineId':2
-	},
-	{
-		'id':19,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:18,
-		'airlineId':2
-	},
-	{
-		'id':20,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:19,
-		'airlineId':3
-	},
-	{
-		'id':21,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:19,
-		'airlineId':3
-	},
-	{
-		'id':22,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:19,
-		'airlineId':3
-	},
-	{
-		'id':23,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:19,
-		'airlineId':3
-	},
-	{
-		'id':24,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:19,
-		'airlineId':3
-	},
-	{
-		'id':25,
-		'origin': 'a',
-		'destination':'b',
-		'departureTime:19,
-		'airlineId':3
-	}, 
-	]
-}
+[
+   {
+      "miles":2472,
+      "departureDate":"2014-07-10T06:00:00Z",
+      "departureTimeOffset":"-0400",
+      "arrivalDate":"2014-07-10T09:00:00Z",
+      "arrivalTimeOffset":"-0700",
+      "flightType":"NonStop",
+      "numOfLegs":1,
+      "flightLegs":[
+         {
+            "departureDate":"2014-07-10T06:00:00Z",
+            "departureTimeOffset":"-0400",
+            "arrivalDate":"2014-07-10T09:00:00Z",
+            "arrivalTimeOffset":"-0700",
+            "flightNumber":"171",
+            "sequenceNumber":1,
+            "miles":2472
+         }
+      ],
+      "departureAirportCode":"JFK",
+      "departureAirportName":"New York JFK",
+      "arrivalAirportCode":"LAX",
+      "arrivalAirportName":"Los Angeles",
+      "airlineCode":"AA",
+      "airlineName":"American Airlines"
+   },
+   {
+      "miles":2472,
+      "departureDate":"2014-07-10T06:00:00Z",
+      "departureTimeOffset":"-0400",
+      "arrivalDate":"2014-07-10T09:00:00Z",
+      "arrivalTimeOffset":"-0700",
+      "flightType":"NonStop",
+      "numOfLegs":1,
+      "flightLegs":[
+         {
+            "departureDate":"2014-07-10T06:00:00Z",
+            "departureTimeOffset":"-0400",
+            "arrivalDate":"2014-07-10T09:00:00Z",
+            "arrivalTimeOffset":"-0700",
+            "flightNumber":"1015",
+            "sequenceNumber":1,
+            "miles":2472
+         }
+      ],
+      "departureAirportCode":"JFK",
+      "departureAirportName":"New York JFK",
+      "arrivalAirportCode":"LAX",
+      "arrivalAirportName":"Los Angeles",
+      "airlineCode":"AS",
+      "airlineName":"Alaska Airlines"
+   },
+   {
+      "miles":2472,
+      "departureDate":"2014-07-10T06:00:00Z",
+      "departureTimeOffset":"-0400",
+      "arrivalDate":"2014-07-10T09:00:00Z",
+      "arrivalTimeOffset":"-0700",
+      "flightType":"NonStop",
+      "numOfLegs":1,
+      "flightLegs":[
+         {
+            "departureDate":"2014-07-10T06:00:00Z",
+            "departureTimeOffset":"-0400",
+            "arrivalDate":"2014-07-10T09:00:00Z",
+            "arrivalTimeOffset":"-0700",
+            "flightNumber":"4310",
+            "sequenceNumber":1,
+            "miles":2472
+         }
+      ],
+      "departureAirportCode":"JFK",
+      "departureAirportName":"New York JFK",
+      "arrivalAirportCode":"LAX",
+      "arrivalAirportName":"Los Angeles",
+      "airlineCode":"BA",
+      "airlineName":"British Airways"
+   },
+   {
+      "miles":2472,
+      "departureDate":"2014-07-10T06:00:00Z",
+      "departureTimeOffset":"-0400",
+      "arrivalDate":"2014-07-10T09:00:00Z",
+      "arrivalTimeOffset":"-0700",
+      "flightType":"NonStop",
+      "numOfLegs":1,
+      "flightLegs":[
+         {
+            "departureDate":"2014-07-10T06:00:00Z",
+            "departureTimeOffset":"-0400",
+            "arrivalDate":"2014-07-10T09:00:00Z",
+            "arrivalTimeOffset":"-0700",
+            "flightNumber":"3212",
+            "sequenceNumber":1,
+            "miles":2472
+         }
+      ],
+      "departureAirportCode":"JFK",
+      "departureAirportName":"New York JFK",
+      "arrivalAirportCode":"LAX",
+      "arrivalAirportName":"Los Angeles",
+      "airlineCode":"QF",
+      "airlineName":"Qantas Airways"
+   },
+   {
+      "miles":2472,
+      "departureDate":"2014-07-10T06:00:00Z",
+      "departureTimeOffset":"-0400",
+      "arrivalDate":"2014-07-10T09:00:00Z",
+      "arrivalTimeOffset":"-0700",
+      "flightType":"NonStop",
+      "numOfLegs":1,
+      "flightLegs":[
+         {
+            "departureDate":"2014-07-10T06:00:00Z",
+            "departureTimeOffset":"-0400",
+            "arrivalDate":"2014-07-10T09:00:00Z",
+            "arrivalTimeOffset":"-0700",
+            "flightNumber":"171",
+            "sequenceNumber":1,
+            "miles":2472
+         }
+      ],
+      "departureAirportCode":"JFK",
+      "departureAirportName":"New York JFK",
+      "arrivalAirportCode":"LAX",
+      "arrivalAirportName":"Los Angeles",
+      "airlineCode":"US",
+      "airlineName":"US Airways"
+   },
+   {
+      "miles":3648,
+      "departureDate":"2014-07-10T00:45:00Z",
+      "departureTimeOffset":"-0400",
+      "arrivalDate":"2014-07-10T09:00:00Z",
+      "arrivalTimeOffset":"-0700",
+      "flightType":"Connect",
+      "numOfLegs":2,
+      "flightLegs":[
+         {
+            "departureDate":"2014-07-10T00:45:00Z",
+            "departureTimeOffset":"-0400",
+            "arrivalDate":"2014-07-10T04:46:00Z",
+            "arrivalTimeOffset":"-0500",
+            "flightNumber":"401",
+            "sequenceNumber":1,
+            "miles":2093
+         },
+         {
+            "departureDate":"2014-07-10T07:00:00Z",
+            "departureTimeOffset":"-0500",
+            "arrivalDate":"2014-07-10T09:00:00Z",
+            "arrivalTimeOffset":"-0700",
+            "flightNumber":"8365",
+            "sequenceNumber":2,
+            "miles":1555
+         }
+      ],
+      "departureAirportCode":"JFK",
+      "departureAirportName":"New York JFK",
+      "arrivalAirportCode":"LAX",
+      "arrivalAirportName":"Los Angeles",
+      "airlineCode":"AM",
+      "airlineName":"AeroMexico"
+   },
+   {
+      "miles":2472,
+      "departureDate":"2014-07-10T06:30:00Z",
+      "departureTimeOffset":"-0400",
+      "arrivalDate":"2014-07-10T09:27:00Z",
+      "arrivalTimeOffset":"-0700",
+      "flightType":"NonStop",
+      "numOfLegs":1,
+      "flightLegs":[
+         {
+            "departureDate":"2014-07-10T06:30:00Z",
+            "departureTimeOffset":"-0400",
+            "arrivalDate":"2014-07-10T09:27:00Z",
+            "arrivalTimeOffset":"-0700",
+            "flightNumber":"441",
+            "sequenceNumber":1,
+            "miles":2472
+         }
+      ],
+      "departureAirportCode":"JFK",
+      "departureAirportName":"New York JFK",
+      "arrivalAirportCode":"LAX",
+      "arrivalAirportName":"Los Angeles",
+      "airlineCode":"UA",
+      "airlineName":"United Airlines"
+   }
+]

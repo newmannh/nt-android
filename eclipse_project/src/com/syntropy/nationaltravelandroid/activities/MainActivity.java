@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.nationaltravelandroid.R;
+import com.syntropy.nationaltravelandroid.datamodel.FlightManager;
 import com.syntropy.nationaltravelandroid.notifications.NotificationSender;
 
 public class MainActivity extends Activity {
@@ -60,7 +61,7 @@ public class MainActivity extends Activity {
                 timerHandler.postDelayed(this, 500);
             }
         };
-        
+        FlightManager.getFlightManager().getFlights(false);
     }
     
     public void toggleTimer(View view){

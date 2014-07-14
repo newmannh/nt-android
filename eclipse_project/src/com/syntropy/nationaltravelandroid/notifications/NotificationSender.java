@@ -12,7 +12,7 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.syntropy.nationaltravelandroid.activities.MainActivity;
+import com.syntropy.nationaltravelandroid.activities.RescheduleOptionListActivity;
 
 public class NotificationSender {
 
@@ -30,14 +30,14 @@ public class NotificationSender {
 									.setContentText("Your flight has been cancelled. Click to view options.");
 		
 		
-		Intent resultIntent = new Intent(context, MainActivity.class); // create explicit intent for activity in app
+		Intent resultIntent = new Intent(context, RescheduleOptionListActivity.class); // create explicit intent for activity in app
 		
 		PendingIntent resultPendingIntent;
 		
 		//Call requires API >= 16
 	    if (Build.VERSION.SDK_INT >= 16) {
 	    	TaskStackBuilder stackBuilder = TaskStackBuilder.create(context); // stack builder object contains an artificial back stack for the started activity
-	    	stackBuilder.addParentStack(MainActivity.class); //adds the back stack for the intent (but not the intent itself)
+	    	stackBuilder.addParentStack(RescheduleOptionListActivity.class); //adds the back stack for the intent (but not the intent itself)
 	    	stackBuilder.addNextIntent(resultIntent);
 	    	resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 	    } else {
