@@ -4,5 +4,7 @@
     <string name="app_name">NationalTravelAndroid</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_reschedule_option_list">RescheduleOptionListActivity</string>
+    <string name="title_activity_flight_option">FlightOptionActivity</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

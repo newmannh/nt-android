@@ -6,11 +6,14 @@ import java.util.GregorianCalendar;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,7 +22,7 @@ import com.example.nationaltravelandroid.R;
 import com.syntropy.nationaltravelandroid.datamodel.Airline;
 import com.syntropy.nationaltravelandroid.datamodel.FlightManager;
 
-public class RescheduleOptionListActivity extends Activity {
+public class AirlineOptionActivity extends Activity {
 
 	private ListView listView = null;
 	
@@ -29,10 +32,20 @@ public class RescheduleOptionListActivity extends Activity {
 		setContentView(R.layout.activity_reschedule_option_list);
 		
 		listView = (ListView)findViewById(R.id.listView);
-		AirlineArrayAdapter adapter = 
+		final AirlineArrayAdapter adapter = 
 				new AirlineArrayAdapter(this, 
 						FlightManager.getFlightManager().getAirlines(false));
 		listView.setAdapter(adapter);
+		
+		final Context context = this;
+		listView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent = new Intent(context,FlightOptionActivity.class);
+				intent.putExtra("AIRLINE", adapter.getItem(position));
+				startActivity(intent);
+			}
+		});
 	}
 	
 	private static class AirlineArrayAdapter extends BaseAdapter{
@@ -63,7 +76,7 @@ public class RescheduleOptionListActivity extends Activity {
 				TextView timePeriodView = (TextView)view.findViewById(R.id.timePeriod);
 
 				flightNumView.setText(airline.getFlights().length+"");
-				airlineNameView.setText(airline.getName()+"");
+				airlineNameView.setText(" "+airline.getName());
 				Date date = airline.getFlights()[0].getDepartureDate();
 				Calendar calendar = GregorianCalendar.getInstance();
 				calendar.setTime(date);
@@ -82,7 +95,7 @@ public class RescheduleOptionListActivity extends Activity {
 		}
 
 		@Override
-		public Object getItem(int position) {
+		public Airline getItem(int position) {
 			return airlines[0];
 		}
 

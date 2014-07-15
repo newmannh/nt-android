@@ -1,5 +1,6 @@
 package com.syntropy.nationaltravelandroid.datamodel;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -37,7 +38,7 @@ public class ServerRequestManager {
 		if(NO_TALKING_TO_SERVER){
 			InputStream in = null;
 			try {
-				in = new FileInputStream("test_data.json");
+				in = new FileInputStream(new File("assets/test_data.json"));
 				String json = IOUtils.toString(in);
 				Log.w("ServerRequestManager", "(TEST DATA USED): "+json);
 				return json;

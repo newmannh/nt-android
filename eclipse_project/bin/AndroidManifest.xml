@@ -4,8 +4,8 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-permission android:name="android.permission.INTERNET" /> 
-    
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="21" />
@@ -25,8 +25,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.syntropy.nationaltravelandroid.activities.RescheduleOptionListActivity"
+            android:name="com.syntropy.nationaltravelandroid.activities.AirlineOptionActivity"
             android:label="@string/title_activity_reschedule_option_list" >
+        </activity>
+        <activity
+            android:name="com.syntropy.nationaltravelandroid.activities.FlightOptionActivity"
+            android:label="@string/title_activity_flight_option" >
         </activity>
     </application>
 

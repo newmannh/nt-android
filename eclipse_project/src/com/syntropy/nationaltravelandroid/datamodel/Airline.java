@@ -3,24 +3,27 @@ package com.syntropy.nationaltravelandroid.datamodel;
 import java.util.Comparator;
 import java.util.TreeSet;
 
-public class Airline {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Airline implements Parcelable{
 	
 	private final String code;
-
 	private final String name;
 	private TreeSet<Flight> flights;
-//	private List<Flight> flights;
+	
+	private static final Comparator<Flight> FLIGHT_COMPARATOR = new Comparator<Flight>() {
+		@Override
+		public int compare(Flight a, Flight b) {
+			// TODO Auto-generated method stub
+			return a.getDepartureDate().compareTo(b.getDepartureDate());
+		}
+	};
 	
 	public Airline(String code, String name){
 		this.code=code;
 		this.name=name;
-		flights = new TreeSet<Flight>(new Comparator<Flight>() {
-			@Override
-			public int compare(Flight a, Flight b) {
-				// TODO Auto-generated method stub
-				return a.getDepartureDate().compareTo(b.getDepartureDate());
-			}
-		});
+		flights = new TreeSet<Flight>(FLIGHT_COMPARATOR);
 	}
 	
 	public String getCode() {
@@ -41,9 +44,45 @@ public class Airline {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return "This the motherfuckin airline "+name+" ("+code+"). Don't fuck with this shit.";
+		return "~~ "+name+"("+code+") ~~";
 	}
+
+	
+	/////////////////////Boilerplate to Parcel Airline\\\\\\\\\\\\\\\\\\\\\\\\
+	
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(code);
+		dest.writeString(name);
+		dest.writeTypedArray(getFlights(), 0);
+		
+	}
+	
+	public static final Parcelable.Creator<Airline> CREATOR = new Parcelable.Creator<Airline>() {
+		@Override
+		public Airline createFromParcel(Parcel source) {
+			return new Airline(source);
+		}
+		@Override
+		public Airline[] newArray(int size) {
+			return new Airline[size];
+		}
+	}; 
+	
+	private Airline(Parcel in){
+		code = in.readString();
+		name = in.readString();
+		Flight[] flightsArray = in.createTypedArray(Flight.CREATOR);
+		flights = new TreeSet<Flight>(FLIGHT_COMPARATOR);
+		for(Flight flight : flightsArray) flights.add(flight);
+	}
+	
+
 	
 	
 }
