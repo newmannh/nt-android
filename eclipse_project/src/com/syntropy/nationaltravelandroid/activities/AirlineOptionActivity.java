@@ -29,7 +29,7 @@ public class AirlineOptionActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_reschedule_option_list);
+		setContentView(R.layout.activity_airline_option);
 		
 		listView = (ListView)findViewById(R.id.listView);
 		final AirlineArrayAdapter adapter = 

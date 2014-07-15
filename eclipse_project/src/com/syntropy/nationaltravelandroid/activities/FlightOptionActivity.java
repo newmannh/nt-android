@@ -1,21 +1,24 @@
 package com.syntropy.nationaltravelandroid.activities;
 
-import com.example.nationaltravelandroid.R;
-import com.example.nationaltravelandroid.R.id;
-import com.example.nationaltravelandroid.R.layout;
-import com.example.nationaltravelandroid.R.menu;
-
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.nationaltravelandroid.R;
+import com.syntropy.nationaltravelandroid.datamodel.Airline;
+
 public class FlightOptionActivity extends ActionBarActivity {
 
+	private Airline airline = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_flight_option);
+		
+		airline = getIntent().getParcelableExtra("AIRLINE");
 	}
 
 	@Override

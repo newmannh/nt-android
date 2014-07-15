@@ -1290,9 +1290,9 @@ containing a value of this type.
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
         public static final int listMode=0x7f050001;
-        public static final int listView=0x7f05003e;
+        public static final int listView=0x7f05003c;
         public static final int list_item=0x7f050029;
-        public static final int logo_image=0x7f05003c;
+        public static final int logo_image=0x7f05003d;
         public static final int middle=0x7f050012;
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
@@ -1319,7 +1319,7 @@ containing a value of this type.
         public static final int tabMode=0x7f050002;
         public static final int time=0x7f050041;
         public static final int timePeriod=0x7f050042;
-        public static final int timerButton=0x7f05003d;
+        public static final int timerButton=0x7f05003e;
         public static final int title=0x7f05002b;
         public static final int top_action_bar=0x7f050020;
         public static final int up=0x7f050021;
@@ -1376,11 +1376,12 @@ containing a value of this type.
         public static final int abc_search_dropdown_item_icons_2line=0x7f030015;
         public static final int abc_search_view=0x7f030016;
         public static final int abc_simple_decor=0x7f030017;
-        public static final int activity_flight_option=0x7f030018;
-        public static final int activity_main=0x7f030019;
-        public static final int activity_reschedule_option_list=0x7f03001a;
+        public static final int activity_airline_option=0x7f030018;
+        public static final int activity_flight_option=0x7f030019;
+        public static final int activity_main=0x7f03001a;
         public static final int airline_row=0x7f03001b;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001c;
+        public static final int flight_row=0x7f03001c;
+        public static final int support_simple_spinner_dropdown_item=0x7f03001d;
     }
     public static final class menu {
         public static final int flight_option=0x7f0c0000;
