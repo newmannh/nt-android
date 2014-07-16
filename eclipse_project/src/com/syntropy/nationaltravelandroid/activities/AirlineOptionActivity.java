@@ -1,8 +1,6 @@
 package com.syntropy.nationaltravelandroid.activities;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import org.joda.time.DateTime;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,6 +19,7 @@ import android.widget.TextView;
 import com.example.nationaltravelandroid.R;
 import com.syntropy.nationaltravelandroid.datamodel.Airline;
 import com.syntropy.nationaltravelandroid.datamodel.FlightManager;
+import com.syntropy.nationaltravelandroid.datamodel.ServerRequestManager;
 
 public class AirlineOptionActivity extends Activity {
 
@@ -31,10 +30,14 @@ public class AirlineOptionActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_airline_option);
 		
+		Airline[] airlines = ServerRequestManager.NO_TALKING_TO_SERVER? 
+				 FlightManager.getFlightManager().getStaticAirlineData(this) : 
+					 FlightManager.getFlightManager().getAirlines(false);
+		
+		
 		listView = (ListView)findViewById(R.id.listView);
 		final AirlineArrayAdapter adapter = 
-				new AirlineArrayAdapter(this, 
-						FlightManager.getFlightManager().getAirlines(false));
+				new AirlineArrayAdapter(this, airlines);
 		listView.setAdapter(adapter);
 		
 		final Context context = this;
@@ -77,11 +80,9 @@ public class AirlineOptionActivity extends Activity {
 
 				flightNumView.setText(airline.getFlights().length+"");
 				airlineNameView.setText(" "+airline.getName());
-				Date date = airline.getFlights()[0].getDepartureDate();
-				Calendar calendar = GregorianCalendar.getInstance();
-				calendar.setTime(date);
-				timeView.setText(calendar.get(Calendar.HOUR)+":00");//TODO
-				timePeriodView.setText(calendar.get(Calendar.HOUR_OF_DAY)>12? "PM" : "AM");
+				DateTime dateTime = airline.getFlights()[0].getDepartureDate();
+				timeView.setText(dateTime.getHourOfDay()%12+":"+dateTime.getMinuteOfHour());
+				timePeriodView.setText(dateTime.getHourOfDay()>12? "PM" : "AM");
 
 			}
 			
@@ -96,7 +97,7 @@ public class AirlineOptionActivity extends Activity {
 
 		@Override
 		public Airline getItem(int position) {
-			return airlines[0];
+			return airlines[position];
 		}
 
 		@Override

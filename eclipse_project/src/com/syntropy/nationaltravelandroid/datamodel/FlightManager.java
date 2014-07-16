@@ -1,8 +1,12 @@
 package com.syntropy.nationaltravelandroid.datamodel;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
+
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -44,10 +48,23 @@ public class FlightManager {
 		return INSTANCE;
 	}
 	
-	private void refreshFlightData() throws NTException{
-		String flightsJson = serverRequestManager.getJSON("flights", null);
+	public Airline[] getStaticAirlineData(Context c){
+		InputStream in;
+		try {
+			in = c.getAssets().open("test_data.json");
+			String jsonString = IOUtils.toString(in);
+			parseFlightData(jsonString);
+			return airlines.values().toArray(new Airline[airlines.size()]);
+		} catch (Exception e) {
+			new NTException(e).withLog("FlightManager", e.getMessage());
+			e.printStackTrace();
+			return new Airline[]{};
+		}
+	}
+	
+	private void parseFlightData(String rawJson){
 		Gson gson = new Gson();
-		flights = gson.fromJson(flightsJson, Flight[].class);
+		flights = gson.fromJson(rawJson, Flight[].class);
 		airlines.clear();
 		for(Flight flight: flights){
 			Airline airline = airlines.get(flight.getAirlineCode());
@@ -62,6 +79,12 @@ public class FlightManager {
 		for(Airline airline : airlines.values()){
 			Log.w("ServerRequestManager", "Airline "+airline.getCode()+" has "+airline.getFlights().length+" flight(s)");
 		}
+	}
+	
+	
+	private void refreshFlightData() throws NTException{
+		String flightsJson = serverRequestManager.getJSON("flights", null);
+		parseFlightData(flightsJson);
 	}
 	
 	/**

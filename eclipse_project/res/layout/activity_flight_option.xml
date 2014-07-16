@@ -9,7 +9,7 @@
     tools:context="com.syntropy.nationaltravelandroid.activities.FlightOptionActivity" >
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/flightOptionListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true" />

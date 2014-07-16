@@ -1,8 +1,5 @@
 package com.syntropy.nationaltravelandroid.datamodel;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Map;
@@ -15,7 +12,7 @@ import com.syntropy.nationaltravelandroid.exception.NTException;
 
 public class ServerRequestManager { 
 
-	public final boolean NO_TALKING_TO_SERVER = false;
+	public final static boolean NO_TALKING_TO_SERVER = true;
 	
 	private final static String SERVER_URL = "https://national-travel.appspot.com/api/v1/";
 			//flights?departureAirportCode=JFK&arrivalAirportCode=LAX&year=2014&month=7&day=10&inFuture=true
@@ -34,40 +31,23 @@ public class ServerRequestManager {
 				s+=entry.getKey()+"="+entry.getValue();
 			}
 		}
+		HttpURLConnection con=null;
+		String json = "";
 		
-		if(NO_TALKING_TO_SERVER){
-			InputStream in = null;
-			try {
-				in = new FileInputStream(new File("assets/test_data.json"));
-				String json = IOUtils.toString(in);
-				Log.w("ServerRequestManager", "(TEST DATA USED): "+json);
-				return json;
-			} catch (Exception e) {
-				throw new NTException(e).withLog("ServerRequestManager", e.getMessage());
-			} finally {
-				IOUtils.closeQuietly(in);
-			}
+		// Making HTTP request
+		try {
+			URL url = new URL(fullUrlString);
+			con = (HttpURLConnection) url.openConnection();
+			json = IOUtils.toString(con.getInputStream());
 			
-		} else {
-			
-			HttpURLConnection con=null;
-			String json = "";
-			
-			// Making HTTP request
-			try {
-				URL url = new URL(fullUrlString);
-				con = (HttpURLConnection) url.openConnection();
-				json = IOUtils.toString(con.getInputStream());
-				
-				Log.d("HTTP GET", "[GET "+url+"] with response \""+json+"\"");
-			} catch (Exception e) {
-				throw new NTException(e).withLog("ServerRequestManager", "Exception when attempting to GET "+fullUrlString+": "+e.getMessage());
-			} finally {
-				if(con!=null) con.disconnect();
-			}
-			return json;
-			
+			Log.d("HTTP GET", "[GET "+url+"] with response \""+json+"\"");
+		} catch (Exception e) {
+			throw new NTException(e).withLog("ServerRequestManager", "Exception when attempting to GET "+fullUrlString+": "+e.getMessage());
+		} finally {
+			if(con!=null) con.disconnect();
 		}
+		return json;
+		
 		
 	}
 

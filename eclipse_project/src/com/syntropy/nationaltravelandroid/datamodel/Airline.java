@@ -42,6 +42,12 @@ public class Airline implements Parcelable{
 		flights.add(flight);
 	}
 	
+	public void addFlights(Flight[] flightsArray){
+		for(Flight flight : flightsArray){
+			flights.add(flight);
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return "~~ "+name+"("+code+") ~~";

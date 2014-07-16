@@ -1,6 +1,7 @@
 package com.syntropy.nationaltravelandroid.datamodel;
 
-import java.util.Date;
+import org.joda.time.DateTime;
+import org.joda.time.format.ISODateTimeFormat;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -15,9 +16,9 @@ import com.google.gson.Gson;
 public class Flight implements Parcelable{
 
 	private int miles;
-	private Date departureDate;
+	private String departureDate;
 	private String departureTimeOffset;
-	private Date arrivalDate;
+	private String arrivalDate;
 	private String arrivalTimeOffset;
 	private String flightType;
 	private int numOfLegs;
@@ -43,16 +44,16 @@ public class Flight implements Parcelable{
 		return miles;
 	}
 
-	public Date getDepartureDate() {
-		return departureDate;
+	public DateTime getDepartureDate() {
+		return ISODateTimeFormat.dateTimeParser().parseDateTime(departureDate);
 	}
 
 	public String getDepartureTimeOffset() {
 		return departureTimeOffset;
 	}
 
-	public Date getArrivalDate() {
-		return arrivalDate;
+	public DateTime getArrivalDate() {
+		return ISODateTimeFormat.dateTimeParser().parseDateTime(arrivalDate);
 	}
 
 	public String getArrivalTimeOffset() {
@@ -96,9 +97,9 @@ public class Flight implements Parcelable{
 	
 	private Flight(Parcel in){
 		this.miles = in.readInt();
-		this.departureDate = new Date(in.readLong());
+		this.departureDate = ISODateTimeFormat.dateTime().print(in.readLong());
 		this.departureTimeOffset=in.readString();
-		this.arrivalDate=new Date(in.readLong());
+		this.arrivalDate=ISODateTimeFormat.dateTime().print(in.readLong());
 		this.arrivalTimeOffset=in.readString();
 		this.flightType=in.readString();
 		this.numOfLegs=in.readInt();
@@ -112,9 +113,9 @@ public class Flight implements Parcelable{
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeInt(miles);
-		dest.writeLong(departureDate.getTime());
+		dest.writeLong(getDepartureDate().getMillis());
 		dest.writeString(departureTimeOffset);
-		dest.writeLong(arrivalDate.getTime());
+		dest.writeLong(getArrivalDate().getMillis());
 		dest.writeString(arrivalTimeOffset);
 		dest.writeString(flightType);
 		dest.writeInt(numOfLegs);
@@ -147,22 +148,22 @@ public class Flight implements Parcelable{
 	 */
 	public static class FlightLeg implements Parcelable{
 		
-		private Date departureDate;
+		private String departureDate;
 		private String departureTimeOffset;
-		private Date arrivalDate;
+		private String arrivalDate;
 		private String arrivalTimeOffset;
 		private String flightNumber;
 		private int sequenceNumber;
 		private int miles;
 		
-		public Date getDepartureDate() {
-			return departureDate;
+		public DateTime getDepartureDate() {
+			return ISODateTimeFormat.dateTimeParser().parseDateTime(departureDate);
 		}
 		public String getDepartureTimeOffset() {
 			return departureTimeOffset;
 		}
-		public Date getArrivalDate() {
-			return arrivalDate;
+		public DateTime getArrivalDate() {
+			return ISODateTimeFormat.dateTimeParser().parseDateTime(arrivalDate);
 		}
 		public String getArrivalTimeOffset() {
 			return arrivalTimeOffset;
@@ -186,9 +187,9 @@ public class Flight implements Parcelable{
 		}
 		@Override
 		public void writeToParcel(Parcel dest, int flags) {
-			dest.writeLong(departureDate.getTime());
+			dest.writeLong(this.getDepartureDate().getMillis());
 			dest.writeString(departureTimeOffset);
-			dest.writeLong(arrivalDate.getTime());
+			dest.writeLong(this.getArrivalDate().getMillis());
 			dest.writeString(arrivalTimeOffset);
 			dest.writeString(flightNumber);
 			dest.writeInt(sequenceNumber);
@@ -208,9 +209,9 @@ public class Flight implements Parcelable{
 		};
 		
 		private FlightLeg(Parcel in){
-			this.departureDate=new Date(in.readLong());
+			this.departureDate=ISODateTimeFormat.dateTime().print(in.readLong());
 			this.departureTimeOffset=in.readString();
-			this.arrivalDate=new Date(in.readLong());
+			this.arrivalDate=ISODateTimeFormat.dateTime().print(in.readLong());
 			this.arrivalTimeOffset=in.readString();
 			this.flightNumber=in.readString();
 			this.sequenceNumber=in.readInt();
