@@ -8,7 +8,6 @@ import org.apache.commons.io.IOUtils;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.syntropy.nationaltravelandroid.exception.NTException;
@@ -75,9 +74,6 @@ public class FlightManager {
 				airline.addFlight(flight);
 				airlines.put(airline.getCode(), airline);
 			}
-		}
-		for(Airline airline : airlines.values()){
-			Log.w("ServerRequestManager", "Airline "+airline.getCode()+" has "+airline.getFlights().length+" flight(s)");
 		}
 	}
 	

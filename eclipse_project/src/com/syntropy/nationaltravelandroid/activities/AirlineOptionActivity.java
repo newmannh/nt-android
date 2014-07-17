@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,7 @@ import com.example.nationaltravelandroid.R;
 import com.syntropy.nationaltravelandroid.datamodel.Airline;
 import com.syntropy.nationaltravelandroid.datamodel.FlightManager;
 import com.syntropy.nationaltravelandroid.datamodel.ServerRequestManager;
+import com.syntropy.nationaltravelandroid.util.FormattingUtils;
 
 public class AirlineOptionActivity extends Activity {
 
@@ -71,8 +71,9 @@ public class AirlineOptionActivity extends Activity {
 			}
 			
 			Airline airline = (Airline) getItem(position);
-			Log.w("RescheduleOptionListActivity", airline.toString());
 			if(airline!=null){
+				FormattingUtils utils = new FormattingUtils();
+				
 				TextView flightNumView = (TextView)view.findViewById(R.id.flightNum);
 				TextView airlineNameView = (TextView)view.findViewById(R.id.airlineName);
 				TextView timeView = (TextView)view.findViewById(R.id.time);
@@ -81,8 +82,8 @@ public class AirlineOptionActivity extends Activity {
 				flightNumView.setText(airline.getFlights().length+"");
 				airlineNameView.setText(" "+airline.getName());
 				DateTime dateTime = airline.getFlights()[0].getDepartureDate();
-				timeView.setText(dateTime.getHourOfDay()%12+":"+dateTime.getMinuteOfHour());
-				timePeriodView.setText(dateTime.getHourOfDay()>12? "PM" : "AM");
+				timeView.setText(utils.getHrsMinsString(dateTime));
+				timePeriodView.setText(FormattingUtils.getPeriodString(dateTime));
 
 			}
 			

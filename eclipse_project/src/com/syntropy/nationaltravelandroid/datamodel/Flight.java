@@ -1,20 +1,20 @@
 package com.syntropy.nationaltravelandroid.datamodel;
 
 import org.joda.time.DateTime;
-import org.joda.time.format.ISODateTimeFormat;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.Gson;
+import com.syntropy.nationaltravelandroid.util.FormattingUtils;
 
 /**
  * Parcelable class that represents a flight
  * @author nathannewman
  *
  */
-public class Flight implements Parcelable{
-
+public class Flight implements Parcelable, Comparable<Flight>{
+	
 	private int miles;
 	private String departureDate;
 	private String departureTimeOffset;
@@ -34,76 +34,86 @@ public class Flight implements Parcelable{
 	private String airlineName;
 	
 	public String getAirlineCode() {
-		return airlineCode;
+		return Flight.this.airlineCode;
 	}
 	public String getAirlineName() {
-		return airlineName;
+		return Flight.this.airlineName;
 	}
 	
 	public int getMiles() {
-		return miles;
+		return Flight.this.miles;
 	}
 
 	public DateTime getDepartureDate() {
-		return ISODateTimeFormat.dateTimeParser().parseDateTime(departureDate);
+		return new FormattingUtils().parseDateTime(Flight.this.departureDate);
 	}
 
 	public String getDepartureTimeOffset() {
-		return departureTimeOffset;
+		return Flight.this.departureTimeOffset;
 	}
 
 	public DateTime getArrivalDate() {
-		return ISODateTimeFormat.dateTimeParser().parseDateTime(arrivalDate);
+		return new FormattingUtils().parseDateTime(Flight.this.arrivalDate);
 	}
 
 	public String getArrivalTimeOffset() {
-		return arrivalTimeOffset;
+		return Flight.this.arrivalTimeOffset;
 	}
 
 	public String getFlightType() {
-		return flightType;
+		return Flight.this.flightType;
 	}
 
 	public int getNumOfLegs() {
-		return numOfLegs;
+		return Flight.this.numOfLegs;
 	}
 
 	public FlightLeg[] getFlightLegs() {
-		return flightLegs;
+		return Flight.this.flightLegs;
 	}
 
 	public String getDepartureAirportCode() {
-		return departureAirportCode;
+		return Flight.this.departureAirportCode;
 	}
 
 	public String getDepartureAirportName() {
-		return departureAirportName;
+		return Flight.this.departureAirportName;
 	}
 
 	public String getArrivalAirportCode() {
-		return arrivalAirportCode;
+		return Flight.this.arrivalAirportCode;
 	}
 
 	public String getArrivalAirportName() {
-		return arrivalAirportName;
+		return Flight.this.arrivalAirportName;
 	}
 
 	@Override
 	public String toString() {
 		return new Gson().toJson(this, Flight.class);
 	}
+	
+	
+	
 
 	////////////////////Boilerplate for Flight Parceling\\\\\\\\\\\\\\\\\\\\\
 	
 	private Flight(Parcel in){
-		this.miles = in.readInt();
-		this.departureDate = ISODateTimeFormat.dateTime().print(in.readLong());
-		this.departureTimeOffset=in.readString();
-		this.arrivalDate=ISODateTimeFormat.dateTime().print(in.readLong());
-		this.arrivalTimeOffset=in.readString();
-		this.flightType=in.readString();
-		this.numOfLegs=in.readInt();
-		this.flightLegs=in.createTypedArray(FlightLeg.CREATOR);
+		FormattingUtils utils = new FormattingUtils();
+		Flight.this.miles = in.readInt();
+		Flight.this.departureDate = utils.dateTimeMillisToString(in.readLong());
+		Flight.this.departureTimeOffset=in.readString();
+		Flight.this.arrivalDate=utils.dateTimeMillisToString(in.readLong());
+		Flight.this.arrivalTimeOffset=in.readString();
+		Flight.this.flightType=in.readString();
+		Flight.this.numOfLegs=in.readInt();
+		Flight.this.flightLegs=in.createTypedArray(FlightLeg.CREATOR);
+		Flight.this.departureAirportCode=in.readString();
+		Flight.this.departureAirportName=in.readString();
+		Flight.this.arrivalAirportCode=in.readString();
+		Flight.this.arrivalAirportName=in.readString();
+		Flight.this.airlineCode=in.readString();
+		Flight.this.airlineName=in.readString();
 	}
 	
 	@Override
@@ -157,25 +167,30 @@ public class Flight implements Parcelable{
 		private int miles;
 		
 		public DateTime getDepartureDate() {
-			return ISODateTimeFormat.dateTimeParser().parseDateTime(departureDate);
+			return new FormattingUtils().parseDateTime(FlightLeg.this.departureDate);
 		}
 		public String getDepartureTimeOffset() {
-			return departureTimeOffset;
+			return FlightLeg.this.departureTimeOffset;
 		}
 		public DateTime getArrivalDate() {
-			return ISODateTimeFormat.dateTimeParser().parseDateTime(arrivalDate);
+			return new FormattingUtils().parseDateTime(FlightLeg.this.arrivalDate);
 		}
 		public String getArrivalTimeOffset() {
-			return arrivalTimeOffset;
+			return FlightLeg.this.arrivalTimeOffset;
 		}
 		public String getFlightNumber() {
-			return flightNumber;
+			return FlightLeg.this.flightNumber;
 		}
 		public int getSequenceNumber() {
-			return sequenceNumber;
+			return FlightLeg.this.sequenceNumber;
 		}
 		public int getMiles() {
-			return miles;
+			return FlightLeg.this.miles;
+		}
+		
+		@Override
+		public String toString() {
+			return new Gson().toJson(FlightLeg.this, FlightLeg.class);
 		}
 		
 		////////////////////Boilerplate for FlightLeg Parceling\\\\\\\\\\\\\\\\\\\\\
@@ -187,13 +202,13 @@ public class Flight implements Parcelable{
 		}
 		@Override
 		public void writeToParcel(Parcel dest, int flags) {
-			dest.writeLong(this.getDepartureDate().getMillis());
-			dest.writeString(departureTimeOffset);
-			dest.writeLong(this.getArrivalDate().getMillis());
-			dest.writeString(arrivalTimeOffset);
-			dest.writeString(flightNumber);
-			dest.writeInt(sequenceNumber);
-			dest.writeInt(miles);
+			dest.writeLong(FlightLeg.this.getDepartureDate().getMillis());
+			dest.writeString(FlightLeg.this.departureTimeOffset);
+			dest.writeLong(FlightLeg.this.getArrivalDate().getMillis());
+			dest.writeString(FlightLeg.this.arrivalTimeOffset);
+			dest.writeString(FlightLeg.this.flightNumber);
+			dest.writeInt(FlightLeg.this.sequenceNumber);
+			dest.writeInt(FlightLeg.this.miles);
 		}
 		
 		public static final Parcelable.Creator<FlightLeg> CREATOR = new Parcelable.Creator<Flight.FlightLeg>() {
@@ -209,19 +224,34 @@ public class Flight implements Parcelable{
 		};
 		
 		private FlightLeg(Parcel in){
-			this.departureDate=ISODateTimeFormat.dateTime().print(in.readLong());
-			this.departureTimeOffset=in.readString();
-			this.arrivalDate=ISODateTimeFormat.dateTime().print(in.readLong());
-			this.arrivalTimeOffset=in.readString();
-			this.flightNumber=in.readString();
-			this.sequenceNumber=in.readInt();
-			this.miles=in.readInt();
+			FormattingUtils utils = new FormattingUtils();
+			FlightLeg.this.departureDate=utils.dateTimeMillisToString(in.readLong());
+			FlightLeg.this.departureTimeOffset=in.readString();
+			FlightLeg.this.arrivalDate=utils.dateTimeMillisToString(in.readLong());
+			FlightLeg.this.arrivalTimeOffset=in.readString();
+			FlightLeg.this.flightNumber=in.readString();
+			FlightLeg.this.sequenceNumber=in.readInt();
+			FlightLeg.this.miles=in.readInt();
 		}
 		
 		
 		
 	}
+
 	
+	
+	@Override
+	public int compareTo(Flight another) {
+		int val = getDepartureDate().compareTo(getArrivalDate());
+		return val==0? this.toString().compareTo(another.toString()) : val;
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		return false;
+//		if(!(o instanceof Flight)) return false;
+//		return this.toString().equals(o.toString());
+	}
 	
 	
 }

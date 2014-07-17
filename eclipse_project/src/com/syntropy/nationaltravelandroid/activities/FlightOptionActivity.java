@@ -1,6 +1,7 @@
 package com.syntropy.nationaltravelandroid.activities;
 
 import org.joda.time.DateTime;
+import org.joda.time.Duration;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,9 +17,12 @@ import android.widget.TextView;
 
 import com.devsmart.android.ui.HorizontalListView;
 import com.example.nationaltravelandroid.R;
+import com.google.gson.Gson;
 import com.syntropy.nationaltravelandroid.datamodel.Airline;
 import com.syntropy.nationaltravelandroid.datamodel.Flight;
 import com.syntropy.nationaltravelandroid.datamodel.Flight.FlightLeg;
+import com.syntropy.nationaltravelandroid.exception.NTException;
+import com.syntropy.nationaltravelandroid.util.FormattingUtils;
 
 public class FlightOptionActivity extends Activity {
 
@@ -64,14 +68,40 @@ public class FlightOptionActivity extends Activity {
 			}
 			
 			Flight flight = (Flight) getItem(position);
-			Log.w("RescheduleOptionListActivity", flight.toString());
 			if(flight!=null){
 				
 				HorizontalListView flightLegsListView = (HorizontalListView)view.findViewById(R.id.flightLegsList);
 				flightLegsListView.setAdapter(new FlightLegListAdapter(context, flight.getFlightLegs()));
 				
 				TextView details = (TextView)view.findViewById(R.id.flightDetails);
-				details.setText("All . Of . The . Details . Go . Here . In . This . Obnoxious . Format . Blahb lah blah blah");
+				
+				Duration duration = new Duration(flight.getDepartureDate(),flight.getArrivalDate());
+				String durationString = duration.getStandardHours()+"hr "+duration.getStandardMinutes()%60+" min";
+				int hourTimeDifference = 0;
+				try {
+					hourTimeDifference = (Integer.parseInt(flight.getDepartureTimeOffset())-Integer.parseInt(flight.getArrivalTimeOffset()))%100;
+				} catch (NumberFormatException e) {
+					hourTimeDifference = 0;
+					new NTException(e).withLog("FlightOptionActivity", e.getMessage());
+					Log.e("FlightOptionActivity", "The offending flight is "+new Gson().toJson(flight,Flight.class));
+				}
+				String timeDifferential = (hourTimeDifference<0? -hourTimeDifference : hourTimeDifference) + " hour time differential";
+				
+				
+				String flightDetailsArray[] = {
+						flight.getNumOfLegs()+" stop",
+						durationString,
+						timeDifferential,
+						"Hindenburg-Class Airship",
+						"seats left?",
+						"gate?"
+						
+						};
+				String flightDetailsString = "";
+				for(String flightDetail : flightDetailsArray){
+					flightDetailsString += flightDetailsString.length()>0? " \u00B7 "+flightDetail : flightDetail;
+				}
+				details.setText(flightDetailsString);
 				
 			}
 			
@@ -94,7 +124,6 @@ public class FlightOptionActivity extends Activity {
 			return position;
 		}
 	
-		
 		private static class FlightLegListAdapter extends BaseAdapter {
 			
 			private Context context = null;
@@ -129,8 +158,9 @@ public class FlightOptionActivity extends Activity {
 				}
 				
 				FlightLeg flightLeg = getItem(position);
-				Log.w("RescheduleOptionListActivity", flightLeg.toString());
 				if(flightLeg!=null){
+					FormattingUtils utils = new FormattingUtils();
+					
 					TextView startTime = (TextView) view.findViewById(R.id.startTime);
 					TextView startPeriod =  (TextView) view.findViewById(R.id.startTimePeriod);
 					TextView startLoc = (TextView) view.findViewById(R.id.startBottom);
@@ -140,14 +170,14 @@ public class FlightOptionActivity extends Activity {
 					TextView endLoc = (TextView) view.findViewById(R.id.destBottom);
 					
 					DateTime dateTimeStart = flightLeg.getDepartureDate();
-					startTime.setText(dateTimeStart.getHourOfDay()%12+":"+dateTimeStart.getMinuteOfHour());
-					startPeriod.setText(dateTimeStart.getHourOfDay()>12? "PM" : "AM");
-					startLoc.setText("TODO TODOTODO");
+					startTime.setText(utils.getHrsMinsString(dateTimeStart));
+					startPeriod.setText(FormattingUtils.getPeriodString(dateTimeStart));
+					startLoc.setText("Some Origin"); //TODO
 					
 					DateTime dateTimeEnd = flightLeg.getArrivalDate();
-					endTime.setText(dateTimeEnd.getHourOfDay()%12+":"+dateTimeEnd.getMinuteOfHour());
-					endPeriod.setText(dateTimeEnd.getHourOfDay()>12? "PM" : "AM");
-					endLoc.setText("TODO I don't know");
+					endTime.setText(utils.getHrsMinsString(dateTimeEnd));
+					endPeriod.setText(FormattingUtils.getPeriodString(dateTimeEnd));
+					endLoc.setText("Some Destination"); //TODO
 
 					
 				}

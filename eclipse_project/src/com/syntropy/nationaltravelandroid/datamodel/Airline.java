@@ -6,6 +6,8 @@ import java.util.TreeSet;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.Gson;
+
 public class Airline implements Parcelable{
 	
 	private final String code;
@@ -15,8 +17,7 @@ public class Airline implements Parcelable{
 	private static final Comparator<Flight> FLIGHT_COMPARATOR = new Comparator<Flight>() {
 		@Override
 		public int compare(Flight a, Flight b) {
-			// TODO Auto-generated method stub
-			return a.getDepartureDate().compareTo(b.getDepartureDate());
+			return a.compareTo(b);
 		}
 	};
 	
@@ -50,7 +51,8 @@ public class Airline implements Parcelable{
 	
 	@Override
 	public String toString() {
-		return "~~ "+name+"("+code+") ~~";
+//		return "~~ "+name+"("+code+") ~~";
+		return "<"+name+"("+code+")>: "+new Gson().toJson(getFlights(), Flight[].class);
 	}
 
 	
