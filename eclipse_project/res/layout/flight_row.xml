@@ -11,17 +11,15 @@
     <LinearLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:weightSum="16"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp" >
+        android:weightSum="16" >
         
         <ImageView 
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="2"
             android:padding="5dp"
             android:src="@drawable/plane_icon_up"/>
@@ -29,9 +27,13 @@
         
         <com.devsmart.android.ui.HorizontalListView
             android:id="@+id/flightLegsList"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_width="0dp"
             android:layout_weight="14"
-            android:layout_height="wrap_content" />
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_height="match_parent" />
         
     </LinearLayout>
     
@@ -39,7 +41,10 @@
         android:id="@+id/flightDetails"
         android:gravity="center_vertical"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="1 stop . 1h 27 min . 3 hour time differential . Canadair Regional Jet . 2 seats left . gate 40"/>
 
     <View

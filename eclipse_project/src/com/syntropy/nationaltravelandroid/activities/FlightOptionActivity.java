@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,7 +38,16 @@ public class FlightOptionActivity extends Activity {
 		airline = getIntent().getParcelableExtra("AIRLINE");
 		
 		ListView flightListView = (ListView) findViewById(R.id.flightOptionListView);
-		flightListView.setAdapter(new FlightListAdapter(this, airline.getFlights()));
+		final FlightListAdapter adapter = new FlightListAdapter(this, airline.getFlights());
+		flightListView.setAdapter(adapter);
+		flightListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//				adapter.select(position);//TODO!!!!!!
+			}
+			
+		});
 		
 	}
 
@@ -53,9 +64,21 @@ public class FlightOptionActivity extends Activity {
 		private Context context;
 		private Flight[] flights;
 		
+		Integer selected = null;
+		
 		public FlightListAdapter(Context context, Flight[] flights) {
 			this.context = context;
 			this.flights = flights;
+		}
+		
+		public void select(int index){ //TODO!!!!!
+			if(selected.intValue()==index) return;
+			if(selected!=null){
+				View previouslySelectedView = getView(selected,null,null);
+				previouslySelectedView.setBackgroundColor(context.getResources().getColor(R.color.White));
+			}
+			View selectedView = getView(index, null, null);
+			selectedView.setBackgroundColor(context.getResources().getColor(R.color.Blue));
 		}
 		
 		
