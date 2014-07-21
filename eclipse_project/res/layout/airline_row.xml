@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/White"
     android:orientation="vertical">
     
     <LinearLayout
@@ -30,8 +31,8 @@
             android:background="@drawable/shapecount"
             android:textColor="@color/White"
             android:layout_weight="1"
-            android:gravity="center"
-            android:layout_gravity="center"
+            android:gravity="top|center"
+            android:layout_gravity="top|center"
             android:text="1" />
 
         <TextView

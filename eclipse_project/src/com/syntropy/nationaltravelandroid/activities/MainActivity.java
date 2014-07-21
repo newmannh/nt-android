@@ -9,6 +9,7 @@ import android.widget.Button;
 import com.example.nationaltravelandroid.R;
 import com.syntropy.nationaltravelandroid.datamodel.FlightManager;
 import com.syntropy.nationaltravelandroid.notifications.NotificationSender;
+import com.syntropy.nationaltravelandroid.services.GCMHelper;
 
 public class MainActivity extends Activity {
 
@@ -30,6 +31,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        new GCMHelper(this).registerForGCM();
         
         FlightManager.getFlightManager();
         

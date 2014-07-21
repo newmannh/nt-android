@@ -2,14 +2,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Gray"
     tools:context="${relativePackage}.${activityClass}" >
 
+    <TextView 
+        android:id="@+id/srcToDestTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="48sp"
+        android:textColor="@color/White"
+        android:gravity="center"
+        android:text="LAX -> PIT"/>
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/airlinesListView"
+        android:layout_below="@+id/srcToDestTitle"
+        android:layout_above="@+id/tel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true" />
+    
+    <Button 
+        android:id="@+id/tel"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/White"
+        android:background="@color/Gray"
+        android:text="(304) 598-0160"
+        android:textSize="24sp"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="center"
+        android:gravity="center"/>
 
 
 </RelativeLayout>

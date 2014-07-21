@@ -35,7 +35,7 @@ public class AirlineOptionActivity extends Activity {
 					 FlightManager.getFlightManager().getAirlines(false);
 		
 		
-		listView = (ListView)findViewById(R.id.listView);
+		listView = (ListView)findViewById(R.id.airlinesListView);
 		final AirlineArrayAdapter adapter = 
 				new AirlineArrayAdapter(this, airlines);
 		listView.setAdapter(adapter);

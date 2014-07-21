@@ -1,25 +1,21 @@
 package com.syntropy.nationaltravelandroid.services;
 
 import android.app.IntentService;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.syntropy.nationaltravelandroid.activities.AirlineOptionActivity;
+import com.syntropy.nationaltravelandroid.notifications.NotificationSender;
 
 public class GcmIntentService extends IntentService {
 	
 	static final String TAG = "GcmIntentService";
 	
     public static final int NOTIFICATION_ID = 1;
-    private NotificationManager mNotificationManager;
-    NotificationCompat.Builder builder;
+    
+    private NotificationSender notificationSender=null;
 
     public GcmIntentService() {
         super("GcmIntentService");
@@ -73,21 +69,8 @@ public class GcmIntentService extends IntentService {
     // This is just one simple example of what you might choose to do with
     // a GCM message.
     private void sendNotification(String msg) {
-        mNotificationManager = (NotificationManager)
-                this.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
-                new Intent(this, AirlineOptionActivity.class), 0);
-
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this)
-        .setSmallIcon(com.google.android.gms.R.drawable.ic_plusone_standard_off_client)
-        .setContentTitle("GCM Notification")
-        .setStyle(new NotificationCompat.BigTextStyle()
-        .bigText(msg))
-        .setContentText(msg);
-
-        mBuilder.setContentIntent(contentIntent);
-        mNotificationManager.notify(NOTIFICATION_ID, mBuilder.build());
+    	Log.w(TAG, "Notification sent with extraneous message: "+msg);
+    	if(notificationSender==null) notificationSender = new NotificationSender(this);
+    	notificationSender.createNotification();
     }
 }
