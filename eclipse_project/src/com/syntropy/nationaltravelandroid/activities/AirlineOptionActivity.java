@@ -44,6 +44,7 @@ public class AirlineOptionActivity extends Activity {
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//				view.setSelected(true);
 				Intent intent = new Intent(context,FlightOptionActivity.class);
 				intent.putExtra("AIRLINE", adapter.getItem(position));
 				startActivity(intent);
@@ -61,29 +62,37 @@ public class AirlineOptionActivity extends Activity {
 			this.airlines = airlines;
 		}
 		
+		static class AirlineViewHolder {
+			TextView flightNumView, airlineNameView, timeView, timePeriodView;
+		}
 		
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View view = convertView;
+			AirlineViewHolder holder;
+			
 			if(view==null){
 				LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				view = inflater.inflate(R.layout.airline_row, parent,false);
+				holder = new AirlineViewHolder();
+				holder.flightNumView = (TextView)view.findViewById(R.id.flightNum);
+				holder.airlineNameView = (TextView)view.findViewById(R.id.airlineName);
+				holder.timeView = (TextView)view.findViewById(R.id.time);
+				holder.timePeriodView = (TextView)view.findViewById(R.id.timePeriod);
+				view.setTag(holder);
+			} else {
+				holder = (AirlineViewHolder) view.getTag();
 			}
 			
 			Airline airline = (Airline) getItem(position);
 			if(airline!=null){
 				FormattingUtils utils = new FormattingUtils();
-				
-				TextView flightNumView = (TextView)view.findViewById(R.id.flightNum);
-				TextView airlineNameView = (TextView)view.findViewById(R.id.airlineName);
-				TextView timeView = (TextView)view.findViewById(R.id.time);
-				TextView timePeriodView = (TextView)view.findViewById(R.id.timePeriod);
 
-				flightNumView.setText(airline.getFlights().length+"");
-				airlineNameView.setText(" "+airline.getName());
+				holder.flightNumView.setText(airline.getFlights().length+"");
+				holder.airlineNameView.setText(" "+airline.getName());
 				DateTime dateTime = airline.getFlights()[0].getDepartureDate();
-				timeView.setText(utils.getHrsMinsString(dateTime));
-				timePeriodView.setText(FormattingUtils.getPeriodString(dateTime));
+				holder.timeView.setText(utils.getHrsMinsString(dateTime));
+				holder.timePeriodView.setText(FormattingUtils.getPeriodString(dateTime));
 
 			}
 			

@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/White"
     android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp">
+    android:layout_marginRight="10dp"
+    android:background="@drawable/flight_list_item_background">
     
 
     <LinearLayout
@@ -25,12 +25,14 @@
             android:src="@drawable/plane_icon_up"/>
         
         
-        <com.devsmart.android.ui.HorizontalListView
+        <TextView
             android:id="@+id/flightLegsList"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:layout_width="0dp"
+            android:textColor="@color/text_selector"
             android:layout_weight="14"
+            android:text="This is just a placeholder"
             android:gravity="center_vertical"
             android:layout_gravity="center_vertical"
             android:layout_height="match_parent" />
@@ -43,6 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp"
+        android:textColor="@color/text_selector"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="1 stop . 1h 27 min . 3 hour time differential . Canadair Regional Jet . 2 seats left . gate 40"/>

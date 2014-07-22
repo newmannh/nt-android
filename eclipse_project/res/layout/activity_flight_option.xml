@@ -23,7 +23,9 @@
         android:layout_above="@+id/callToBookButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:choiceMode="singleChoice"
+        android:listSelector="@drawable/flight_list_view_background" />
     
     <Button 
         android:id="@+id/callToBookButton"
@@ -36,6 +38,7 @@
         android:layout_gravity="center"
         android:background="@drawable/button_background_rounded_blue"
         android:textSize="36sp"
-        android:text="Call to Book"/>
+        android:text="Call to Book"
+        android:onClick="bookFlight"/>
 
 </RelativeLayout>

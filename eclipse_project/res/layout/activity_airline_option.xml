@@ -20,7 +20,8 @@
         android:layout_above="@+id/tel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:listSelector="@drawable/flight_list_view_background" />
     
     <Button 
         android:id="@+id/tel"

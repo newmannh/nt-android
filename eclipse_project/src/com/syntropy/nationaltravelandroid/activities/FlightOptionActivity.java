@@ -16,6 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.devsmart.android.ui.HorizontalListView;
 import com.example.nationaltravelandroid.R;
@@ -30,23 +31,25 @@ public class FlightOptionActivity extends Activity {
 
 	private Airline airline = null;
 	
+	FlightListAdapter adapter;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_flight_option);
 		
 		airline = getIntent().getParcelableExtra("AIRLINE");
+		final Context c = this;
 		
 		ListView flightListView = (ListView) findViewById(R.id.flightOptionListView);
-		final FlightListAdapter adapter = new FlightListAdapter(this, airline.getFlights());
+		adapter = new FlightListAdapter(this, airline.getFlights());
 		flightListView.setAdapter(adapter);
 		flightListView.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//				adapter.select(position);//TODO!!!!!!
+				view.setSelected(true);
+				adapter.selectFlight(position);
 			}
-			
 		});
 		
 	}
@@ -58,45 +61,55 @@ public class FlightOptionActivity extends Activity {
 		return true;
 	}
 	
+	public void bookFlight(View view){
+		Flight flight = adapter.getSelectedFlight();
+		String flightString = flight==null? "null" : flight.toString();
+		Toast.makeText(this, "Booking flight "+flightString, Toast.LENGTH_LONG).show();
+	}
+	
+	
 	
 	private static class FlightListAdapter extends BaseAdapter{
 
 		private Context context;
 		private Flight[] flights;
 		
-		Integer selected = null;
+		private Flight selectedFlight = null;
 		
 		public FlightListAdapter(Context context, Flight[] flights) {
 			this.context = context;
 			this.flights = flights;
 		}
 		
-		public void select(int index){ //TODO!!!!!
-			if(selected.intValue()==index) return;
-			if(selected!=null){
-				View previouslySelectedView = getView(selected,null,null);
-				previouslySelectedView.setBackgroundColor(context.getResources().getColor(R.color.White));
-			}
-			View selectedView = getView(index, null, null);
-			selectedView.setBackgroundColor(context.getResources().getColor(R.color.Blue));
+		public void selectFlight(int pos){
+			this.selectedFlight = flights[pos];
+		}
+		
+		public Flight getSelectedFlight(){
+			return selectedFlight;
 		}
 		
 		
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View view = convertView;
+			FlightViewHolder holder;
+			
 			if(view==null){
 				LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				view = inflater.inflate(R.layout.flight_row, parent,false);
+				holder = new FlightViewHolder();
+//				holder.hlv = (HorizontalListView)view.findViewById(R.id.flightLegsList);
+				holder.tv = (TextView)view.findViewById(R.id.flightDetails);
+				view.setTag(holder);
+			} else {
+				holder = (FlightViewHolder) view.getTag();
 			}
 			
 			Flight flight = (Flight) getItem(position);
 			if(flight!=null){
 				
-				HorizontalListView flightLegsListView = (HorizontalListView)view.findViewById(R.id.flightLegsList);
-				flightLegsListView.setAdapter(new FlightLegListAdapter(context, flight.getFlightLegs()));
-				
-				TextView details = (TextView)view.findViewById(R.id.flightDetails);
+//				holder.hlv.setAdapter(new FlightLegListAdapter(context, flight.getFlightLegs()));
 				
 				Duration duration = new Duration(flight.getDepartureDate(),flight.getArrivalDate());
 				String durationString = duration.getStandardHours()+"hr "+duration.getStandardMinutes()%60+" min";
@@ -124,7 +137,7 @@ public class FlightOptionActivity extends Activity {
 				for(String flightDetail : flightDetailsArray){
 					flightDetailsString += flightDetailsString.length()>0? " \u00B7 "+flightDetail : flightDetail;
 				}
-				details.setText(flightDetailsString);
+				holder.tv.setText(flightDetailsString);
 				
 			}
 			
@@ -146,6 +159,12 @@ public class FlightOptionActivity extends Activity {
 		public long getItemId(int position) {
 			return position;
 		}
+		
+		static class FlightViewHolder{
+//			HorizontalListView hlv;
+			TextView tv;
+		}
+		
 	
 		private static class FlightLegListAdapter extends BaseAdapter {
 			
@@ -172,35 +191,44 @@ public class FlightOptionActivity extends Activity {
 				return position;
 			}
 
+			static class FlightLegViewHolder{
+				TextView startTime, startPeriod, startLoc, endTime, endPeriod, endLoc;
+			}
+			
 			@Override
 			public View getView(int position, View convertView, ViewGroup parent) {
 				View view = convertView;
+				FlightLegViewHolder holder;
+				
+				
 				if(view==null){
 					LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 					view = inflater.inflate(R.layout.flight_leg_list_item, parent,false);
+					holder = new FlightLegViewHolder();
+					holder.startTime = (TextView) view.findViewById(R.id.startTime);
+					holder.startPeriod = (TextView) view.findViewById(R.id.startTimePeriod);
+					holder.startLoc = (TextView) view.findViewById(R.id.startBottom);
+					holder.endTime = (TextView) view.findViewById(R.id.destTime);
+					holder.endPeriod =  (TextView) view.findViewById(R.id.destTimePeriod);
+					holder.endLoc = (TextView) view.findViewById(R.id.destBottom);
+					view.setTag(holder);
+				} else {
+					holder = (FlightLegViewHolder) view.getTag();
 				}
 				
 				FlightLeg flightLeg = getItem(position);
 				if(flightLeg!=null){
 					FormattingUtils utils = new FormattingUtils();
 					
-					TextView startTime = (TextView) view.findViewById(R.id.startTime);
-					TextView startPeriod =  (TextView) view.findViewById(R.id.startTimePeriod);
-					TextView startLoc = (TextView) view.findViewById(R.id.startBottom);
-					
-					TextView endTime = (TextView) view.findViewById(R.id.destTime);
-					TextView endPeriod =  (TextView) view.findViewById(R.id.destTimePeriod);
-					TextView endLoc = (TextView) view.findViewById(R.id.destBottom);
-					
 					DateTime dateTimeStart = flightLeg.getDepartureDate();
-					startTime.setText(utils.getHrsMinsString(dateTimeStart));
-					startPeriod.setText(FormattingUtils.getPeriodString(dateTimeStart));
-					startLoc.setText("Some Origin"); //TODO
+					holder.startTime.setText(utils.getHrsMinsString(dateTimeStart));
+					holder.startPeriod.setText(FormattingUtils.getPeriodString(dateTimeStart));
+					holder.startLoc.setText("Some Origin"); //TODO
 					
 					DateTime dateTimeEnd = flightLeg.getArrivalDate();
-					endTime.setText(utils.getHrsMinsString(dateTimeEnd));
-					endPeriod.setText(FormattingUtils.getPeriodString(dateTimeEnd));
-					endLoc.setText("Some Destination"); //TODO
+					holder.endTime.setText(utils.getHrsMinsString(dateTimeEnd));
+					holder.endPeriod.setText(FormattingUtils.getPeriodString(dateTimeEnd));
+					holder.endLoc.setText("Some Destination"); //TODO
 
 					
 				}

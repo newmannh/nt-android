@@ -9,6 +9,8 @@
     <color name="GrayText">#6D6D6D</color>
 
     <!-- Others -->
+    <color name="Blue2">#0066CC
+</color>
     <color name="white">#FFFFFF</color>
     <color name="yellow">#FFFF00</color>
     <color name="fuchsia">#FF00FF</color>
