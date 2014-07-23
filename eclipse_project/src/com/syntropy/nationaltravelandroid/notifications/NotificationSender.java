@@ -12,6 +12,7 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.example.nationaltravelandroid.R;
 import com.syntropy.nationaltravelandroid.activities.AirlineOptionActivity;
 
 public class NotificationSender {
@@ -25,7 +26,9 @@ public class NotificationSender {
 	public NotificationSender(Context context){
 		this.context = context;
 		notificationBuilder = new NotificationCompat.Builder(context)
-									.setSmallIcon(android.R.drawable.ic_menu_manage)
+		.setSmallIcon(android.R.drawable.ic_menu_manage)
+//									.setSmallIcon(android.R.drawable.ic_menu_manage)
+									.setSmallIcon(R.drawable.nt_main)
 									.setContentTitle("National Travel Alert")
 									.setContentText("Your flight has been cancelled. Click to view options.");
 		

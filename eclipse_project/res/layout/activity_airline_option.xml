@@ -12,7 +12,7 @@
         android:textSize="48sp"
         android:textColor="@color/White"
         android:gravity="center"
-        android:text="LAX -> PIT"/>
+        android:text="LAX \u2192 PIT"/>
 
     <ListView
         android:id="@+id/airlinesListView"

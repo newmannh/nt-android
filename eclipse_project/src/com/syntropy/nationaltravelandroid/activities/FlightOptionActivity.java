@@ -18,7 +18,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.devsmart.android.ui.HorizontalListView;
 import com.example.nationaltravelandroid.R;
 import com.google.gson.Gson;
 import com.syntropy.nationaltravelandroid.datamodel.Airline;
@@ -36,10 +35,10 @@ public class FlightOptionActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		setContentView(R.layout.activity_flight_option);
 		
 		airline = getIntent().getParcelableExtra("AIRLINE");
-		final Context c = this;
 		
 		ListView flightListView = (ListView) findViewById(R.id.flightOptionListView);
 		adapter = new FlightListAdapter(this, airline.getFlights());
